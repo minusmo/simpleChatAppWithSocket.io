@@ -8,13 +8,13 @@
         margin: 0 auto 0 auto;
       }
     </style>
-    <script src="/socket.io-client/dist/socket.io.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script>
       const herokuURL = "https://nameless-depths-57513.herokuapp.com/";
       const sendButton = document.getElementById("sendButton");
       const textInput = document.getElementById("textInput");
       const chatMessages = document.getElementById("chatMessages");
-      const socket = io();
+      const socket = io.s;
       //   const userName = window.prompt("What's yout name?");
 
       sendButton.addEventListener("click", (e) => {

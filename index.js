@@ -1,6 +1,7 @@
 const express = require("express")();
 const server = require("http").createServer(express);
 const io = require("socket.io")(server);
+const path = require("path");
 
 const clientList = [];
 let userMessageList = [];
@@ -26,7 +27,7 @@ io.on("connection", (socket) => {
 
 const port = process.env.PORT || 1557;
 
-express.use("/", (req, res) => {
+express.get("/", (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
   res.status(200);
   res.sendFile("/chat.html", { root: __dirname });
