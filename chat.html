@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>bakssal chat</title>
+    <style>
+      #chatContainer {
+        margin: 0 auto 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chatContainer">
+      <ul id="chatMessages"></ul>
+      <form action="">
+        <input id="textInput" type="text" />
+        <input id="sendButton" type="submit" value="send" />
+      </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js"></script>
+    <script>
+      const herokuURL = "https://nameless-depths-57513.herokuapp.com/";
+      const sendButton = document.getElementById("sendButton");
+      const textInput = document.getElementById("textInput");
+      const chatMessages = document.getElementById("chatMessages");
+      const socket = io(herokuURL);
+      //   const userName = window.prompt("What's yout name?");
+
+      sendButton.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const text = textInput.value;
+        console.log(text);
+
+        socket.emit("new message", text);
+
+        textInput.value = "";
+      });
+
+      socket.on("greeting", (greeting) => {
+        let { message } = greeting;
+
+        let newList = document.createElement("li");
+        newList.textContent = message;
+
+        chatMessages.appendChild(newList);
+      });
+
+      socket.on("message", (data) => {
+        let { message } = data;
+
+        let newList = document.createElement("li");
+        newList.textContent = message;
+
+        chatMessages.appendChild(newList);
+      });
+    </script>
+  </body>
+</html>

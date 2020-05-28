@@ -1,6 +1,6 @@
 const app = require("express")();
-const server = require("https").createServer(app);
-const io = require("socket.io")(server);
+// const server = require("https").createServer(app);
+const io = require("socket.io")(app);
 
 const clientList = [];
 let userMessageList = [];
@@ -26,11 +26,18 @@ io.on("connection", (socket) => {
 
 const port = process.env.PORT || 1557;
 
-server.get("/", (req, res) => {
+app.use("/", (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
-  res.status(200).send();
+  res.status(200);
+  res.sendFile("chat.html", { root: "/" });
 });
 
-server.listen(port, () => {
+// app.get("/", (req, res) => {
+//   res.set("Access-Control-Allow-Origin", "*");
+
+//   res.status(200);
+// });
+
+app.listen(port, () => {
   console.log("now listening...");
 });
