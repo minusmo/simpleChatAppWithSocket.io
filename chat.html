@@ -10,23 +10,25 @@
     </style>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      const herokuURL = "https://nameless-depths-57513.herokuapp.com/";
-      const sendButton = document.getElementById("sendButton");
+      // const herokuURL = "https://nameless-depths-57513.herokuapp.com/";
       const textInput = document.getElementById("textInput");
       const chatMessages = document.getElementById("chatMessages");
       const socket = io();
       //   const userName = window.prompt("What's yout name?");
 
-      sendButton.addEventListener("click", (e) => {
-        e.preventDefault();
+      window.onload = () => {
+        const sendButton = document.getElementById("sendButton");
+        sendButton.addEventListener("click", (e) => {
+          e.preventDefault();
 
-        const text = textInput.value;
-        console.log(text);
+          const text = textInput.value;
+          console.log(text);
 
-        socket.emit("new message", text);
+          socket.emit("new message", text);
 
-        textInput.value = "";
-      });
+          textInput.value = "";
+        });
+      };
 
       socket.on("greeting", (greeting) => {
         let { message } = greeting;
