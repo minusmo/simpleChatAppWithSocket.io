@@ -3,8 +3,21 @@ const server = require("http").createServer(express);
 const io = require("socket.io")(server);
 const path = require("path");
 
-const clientList = [];
-let userMessageList = [];
+const port = process.env.PORT || 1557;
+
+server.listen(port, () => {
+  console.log("now listening...");
+});
+
+// express.use(path);
+express.get("/", (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+  res.status(200);
+  res.sendFile("/chat.html", { root: __dirname });
+});
+
+// const clientList = [];
+// let userMessageList = [];
 
 io.on("connection", (socket) => {
   /* … */
@@ -25,21 +38,8 @@ io.on("connection", (socket) => {
   });
 });
 
-const port = process.env.PORT || 1557;
-
-express.use(path);
-express.use("/", (req, res) => {
-  res.set("Access-Control-Allow-Origin", "*");
-  res.status(200);
-  res.sendFile("/chat.html", { root: __dirname });
-});
-
 // app.get("/", (req, res) => {
 //   res.set("Access-Control-Allow-Origin", "*");
 
 //   res.status(200);
 // });
-
-express.listen(port, () => {
-  console.log("now listening...");
-});
