@@ -27,7 +27,8 @@ io.on("connection", (socket) => {
 
 const port = process.env.PORT || 1557;
 
-express.get("/", (req, res) => {
+express.use(path);
+express.use("/", (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
   res.status(200);
   res.sendFile("/chat.html", { root: __dirname });
