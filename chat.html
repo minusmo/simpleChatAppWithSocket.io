@@ -8,16 +8,6 @@
         margin: 0 auto 0 auto;
       }
     </style>
-  </head>
-  <body>
-    <div id="chatContainer">
-      <ul id="chatMessages"></ul>
-      <form action="">
-        <input id="textInput" type="text" />
-        <input id="sendButton" type="submit" value="send" />
-      </form>
-    </div>
-
     <script src="/socket.io/socket.io.js"></script>
     <script>
       const herokuURL = "https://nameless-depths-57513.herokuapp.com/";
@@ -56,5 +46,14 @@
         chatMessages.appendChild(newList);
       });
     </script>
+  </head>
+  <body>
+    <div id="chatContainer">
+      <ul id="chatMessages"></ul>
+      <form action="">
+        <input id="textInput" type="text" />
+        <input id="sendButton" type="submit" value="send" />
+      </form>
+    </div>
   </body>
 </html>
