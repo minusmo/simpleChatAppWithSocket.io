@@ -1,5 +1,5 @@
 const app = require("express")();
-const server = require("http").createServer(app);
+const server = require("https").createServer(app);
 const io = require("socket.io")(server);
 
 const clientList = [];
@@ -24,9 +24,12 @@ io.on("connection", (socket) => {
   });
 });
 
-const port = 1557;
-const host = "192.168.35.174";
+const port = process.env.PORT;
 
-server.listen(port, host, () => {
+server.get("/", (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+  res.status(200).send();
+});
+server.listen(port, () => {
   console.log("now listening...");
 });
