@@ -24,12 +24,13 @@ io.on("connection", (socket) => {
   });
 });
 
-const port = process.env.PORT;
+const port = process.env.PORT || 1557;
 
 server.get("/", (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
   res.status(200).send();
 });
+
 server.listen(port, () => {
   console.log("now listening...");
 });
