@@ -9,6 +9,16 @@
       }
     </style>
     <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <div id="chatContainer">
+      <ul id="chatMessages"></ul>
+      <form action="">
+        <input id="textInput" type="text" />
+        <input id="sendButton" type="submit" value="send" />
+      </form>
+    </div>
+
     <script>
       // const herokuURL = "https://nameless-depths-57513.herokuapp.com/";
       const textInput = document.getElementById("textInput");
@@ -16,19 +26,17 @@
       const socket = io();
       //   const userName = window.prompt("What's yout name?");
 
-      window.onload = () => {
-        const sendButton = document.getElementById("sendButton");
-        sendButton.addEventListener("click", (e) => {
-          e.preventDefault();
+      const sendButton = document.getElementById("sendButton");
+      sendButton.addEventListener("click", (e) => {
+        e.preventDefault();
 
-          const text = textInput.value;
-          console.log(text);
+        const text = textInput.value;
+        console.log(text);
 
-          socket.emit("new message", text);
+        socket.emit("new message", text);
 
-          textInput.value = "";
-        });
-      };
+        textInput.value = "";
+      });
 
       socket.on("greeting", (greeting) => {
         let { message } = greeting;
@@ -48,14 +56,5 @@
         chatMessages.appendChild(newList);
       });
     </script>
-  </head>
-  <body>
-    <div id="chatContainer">
-      <ul id="chatMessages"></ul>
-      <form action="">
-        <input id="textInput" type="text" />
-        <input id="sendButton" type="submit" value="send" />
-      </form>
-    </div>
   </body>
 </html>
