@@ -29,7 +29,7 @@ const port = process.env.PORT || 1557;
 app.use("/", (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
   res.status(200);
-  res.sendFile("chat.html", { root: "/" });
+  res.sendFile("chat.html", { root: __dirname });
 });
 
 // app.get("/", (req, res) => {
